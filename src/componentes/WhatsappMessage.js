@@ -1,9 +1,11 @@
 import React from "react";
 
+import "./whatsappMessage.css";
+
 function WhatsappMessage() {
   return (
     <div className="chat">
-      <h2>WhatsApp Link Generate</h2>
+      <h2 className="title">WhatsApp Link Generate</h2>
       <div className="chat-container">
         <div className="bar">
           <div className="back">
