@@ -6,7 +6,6 @@ import WhatsappMessage from "./componentes/WhatsappMessage";
 function AllRoutes() {
   return (
     <div>
-      <h2>Ok</h2>
       <Routes>
         <Route path="/" element={<WhatsappMessage />} />
       </Routes>
