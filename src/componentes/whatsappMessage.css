@@ -1,0 +1,318 @@
+.chat {
+  height: 800px;
+  width: 340px;
+}
+
+.chat-container {
+  height: 50%;
+}
+
+.bar {
+  background: #005e54;
+  color: #fff;
+  height: 55px;
+  padding: 0 8px;
+}
+
+.bar:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.bar div {
+  float: left;
+  transform: translateY(-50%);
+  position: relative;
+  top: 50%;
+}
+
+.bar .actions {
+  float: right;
+  margin: 0 0 0 20px;
+}
+
+.bar .actions.more {
+  margin: 0 12px 0 32px;
+}
+
+.bar .actions.attachment {
+  margin: 0 0 0 30px;
+}
+
+.bar .actions.attachment i {
+  display: block;
+  transform: rotate(-45deg);
+}
+
+.bar .avatar {
+  height: 36px;
+  margin: 0 0 0 5px;
+  width: 36px;
+}
+
+.bar .avatar img {
+  border-radius: 50%;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: block;
+  width: 100%;
+}
+
+.bar .name {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin: 0 0 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 110px;
+}
+
+.bar .status {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.conversation {
+  height: calc(100% - 12px);
+  background: #efe7dd
+  url("https://cloud.githubusercontent.com/assets/398893/15136779/4e765036-1639-11e6-9201-67e728e86f39.jpg")
+  repeat;
+  position: relative;
+  z-index: 0;
+}
+
+.conversation ::-webkit-scrollbar {
+  height: 1px;
+  transition: all 0.5s;
+  width: 5px;
+  z-index: 10;
+}
+
+.conversation ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversation ::-webkit-scrollbar-thumb {
+  background: #b3ada7;
+}
+
+.conversation .conversation-container {
+  box-shadow: inset 0 10px 10px -10px #000000;
+  height: calc(100% - 68px);
+  margin-bottom: 5px;
+  padding: 0 16px;
+}
+
+.conversation .conversation-container:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.message {
+  color: #000;
+  clear: both;
+  font-size: 15px;
+  line-height: 18px;
+  margin: 8px 0;
+  max-width: 85%;
+  padding: 8px;
+  position: relative;
+  word-wrap: break-word;
+  z-index: -1;
+}
+
+.message:after {
+  border-style: solid;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+
+.message:first-child {
+  margin: 16px 0 8px;
+}
+
+.message.received {
+  background: #fff;
+  border-radius: 0px 5px 5px 5px;
+  float: left;
+}
+
+.message.received:after {
+  border-width: 0px 10px 10px 0;
+  border-color: transparent #fff transparent transparent;
+  left: -10px;
+  top: 0;
+}
+
+.message.sent {
+  background: #e1ffc7;
+  border-radius: 5px 0px 5px 5px;
+  float: right;
+}
+
+.message.sent:after {
+  border-width: 0px 0 10px 10px;
+  border-color: transparent transparent transparent #e1ffc7;
+  top: 0;
+  right: -10px;
+}
+
+.conversation-compose {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  overflow: hidden;
+  width: 100%;
+  z-index: 2;
+}
+
+.conversation-compose div,
+.conversation-compose input {
+  background: #fff;
+  height: 100%;
+}
+
+.conversation-compose .emoji {
+  align-items: center;
+  background: white;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  margin-left: 8px;
+  width: 48px;
+}
+
+.conversation-compose .input-msg {
+  border: 0;
+  flex: 1 1 auto;
+  font-size: 16px;
+  margin: 0;
+  min-width: 50px;
+  outline: none;
+}
+
+.conversation-compose .photo {
+  position: relative;
+}
+
+.conversation-compose .photo:after {
+  border-width: 0px 0 10px 10px;
+  border-color: transparent transparent transparent #fff;
+  border-style: solid;
+  content: "";
+  position: absolute;
+  height: 0;
+  right: -10px;
+  top: 0;
+  width: 0;
+}
+
+.conversation-compose .photo i {
+  display: block;
+  color: #7d8488;
+  font-size: 24px;
+  left: 50%;
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
+
+.conversation-compose .send {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  flex: 0 0 auto;
+  margin-left: 8px;
+  margin-right: 8px;
+  outline: none;
+  padding: 0;
+  position: relative;
+}
+
+.conversation-compose .send .circle {
+  background: #008a7c;
+  border-radius: 50%;
+  color: #fff;
+  height: 48px;
+  justify-content: center;
+  width: 48px;
+}
+
+.conversation-compose .send .circle i {
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+  .chat {
+    height: 1400px;
+    width: 500px;
+  }
+
+  .chat .title {
+    font-size: 3em;
+  }
+
+  .bar .name {
+    font-size: 26px;
+  }
+
+  .bar .name .status {
+    font-size: 18px;
+  }
+
+  .message {
+    font-size: 28px;
+  }
+
+  .message.received {
+    line-height: 28px;
+  }
+
+  .message.sent {
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 425px) {
+  .chat {
+    height: 600px;
+    width: 250px;
+  }
+
+  .chat .title {
+    font-size: 1.5em;
+  }
+
+  .bar .name {
+    font-size: 18px;
+  }
+
+  .bar .name .status {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 12px;
+  }
+
+  .conversation-compose .input-msg {
+    font-size: 11px;
+  }
+
+  .conversation-compose .send .circle {
+    height: 38px;
+    width: 38px;
+  }
+}
+
+
