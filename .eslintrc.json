@@ -3,7 +3,11 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "airbnb", "cypress"],
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:cypress/recommended"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -12,5 +16,9 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
-  "rules": {}
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "quotes": [2, "double", { "avoidEscape": false }],
+    "comma-dangle": [2, "always-multiline"]
+  }
 }
