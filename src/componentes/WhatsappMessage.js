@@ -5,7 +5,7 @@ import "./whatsappMessage.css";
 function WhatsappMessage() {
   return (
     <div className="chat">
-      <h2 className="title">WhatsApp Link Generate</h2>
+      <h2 className="title" data-cy="title">WhatsApp Link Generate</h2>
       <div className="chat-container">
         <div className="bar">
           <div className="back">
@@ -79,19 +79,21 @@ function WhatsappMessage() {
             <input
               className="input-msg"
               name="input"
+              data-cy="field"
               placeholder="Type a message"
               autoComplete="off"
             />
             <div className="photo">
               <i className="zmdi zmdi-camera">{}</i>
             </div>
-            <button type="button" className="send">
+            <button type="button" className="send" data-cy="send">
               <div className="circle">
                 <i className="zmdi zmdi-mail-send">{}</i>
               </div>
             </button>
           </form>
         </div>
+        <button type="button" data-cy="copy">Copiar Link</button>
       </div>
     </div>
   );
