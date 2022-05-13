@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import ReceivedMessage from "./ReceivedMessage";
+import SendMessage from "./SendMessage";
+import phoneVerify from "../utils/functions";
 
 import "./whatsappMessage.css";
 
 function WhatsappMessage() {
+  const [field, setFiled] = useState("");
+  const [data, setData] = useState([[]]);
+  const [statusPhone, setStatusPhone] = useState(null);
+  const [phone, setPhone] = useState("phone vazio");
+  const [message, setMessage] = useState("message vazio");
+
+  const phoneOk = field.replace(/^(\d\d)(\d{5})(\d{4})/, "($1) $2-$3");
+
+  function handleClick() {
+    setData([...data, <SendMessage key={data.length} content={field} />]);
+
+    if (phoneVerify(phoneOk) && !statusPhone) {
+      setPhone(field);
+      setStatusPhone(true);
+    } else if (phone.length > 0) {
+      setMessage(field);
+    } else {
+      setStatusPhone(data.length);
+    }
+
+    document.querySelector(".input-msg").value = "";
+  }
+
+  useEffect(() => {
+    setData([
+      ...data, <ReceivedMessage key={phoneOk} content={phoneOk} status={phoneVerify(phoneOk)} />]);
+    console.log(phone, message);
+  }, [statusPhone]);
+
   return (
     <div className="chat">
       <h2 className="title" data-cy="title">WhatsApp Link Generate</h2>
@@ -33,7 +66,6 @@ function WhatsappMessage() {
             <div className="message sent">
               Olá, como posso criar um link whatsapp?
               <span className="metadata">
-                <span className="time">{}</span>
                 <span className="tick">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -52,11 +84,9 @@ function WhatsappMessage() {
               </span>
             </div>
             <div className="message received">
-              Olá, muito fácil. Digite seu número whatsapp com DDD. Como no exemplo: 85989587554
-              <span className="metadata">
-                <span className="time">{}</span>
-              </span>
+              Olá, tudo bem? É muito fácil. Digite seu número whatsapp com DDD.
             </div>
+            {data.map((render) => render)}
           </div>
           <form className="conversation-compose">
             <div className="emoji">
@@ -82,11 +112,12 @@ function WhatsappMessage() {
               data-cy="field"
               placeholder="Type a message"
               autoComplete="off"
+              onChange={({ target: { value } }) => setFiled(value)}
             />
             <div className="photo">
               <i className="zmdi zmdi-camera">{}</i>
             </div>
-            <button type="button" className="send" data-cy="send">
+            <button type="button" className="send" data-cy="send" onClick={handleClick}>
               <div className="circle">
                 <i className="zmdi zmdi-mail-send">{}</i>
               </div>
