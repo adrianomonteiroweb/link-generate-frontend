@@ -1,30 +1,43 @@
 import React, { useEffect, useState } from "react";
 
+import { phoneVerify } from "../utils/functions";
+
 import ReceivedMessage from "./ReceivedMessage";
 import SendMessage from "./SendMessage";
-import phoneVerify from "../utils/functions";
+import TypeWhatsappLink from "./TypeWhatsappLink";
+import GeneratedLink from "./GeneratedLink";
 
 import "./whatsappMessage.css";
 
 function WhatsappMessage() {
-  const [field, setFiled] = useState("");
+  const [field, setField] = useState("");
   const [data, setData] = useState([[]]);
-  const [statusPhone, setStatusPhone] = useState(null);
-  const [phone, setPhone] = useState("phone vazio");
-  const [message, setMessage] = useState("message vazio");
+  const [whatsapp, setPhone] = useState(false);
+  const [message, setMessage] = useState("");
+  const [type, setType] = useState("api");
+  const [statusPhone, setStatusPhone] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(false);
+  const [statusType, setStatusType] = useState(false);
 
-  const phoneOk = field.replace(/^(\d\d)(\d{5})(\d{4})/, "($1) $2-$3");
+  const formatedPhone = field.replace(/^(\d\d)(\d{5})(\d{4})/, "($1) $2-$3");
 
   function handleClick() {
-    setData([...data, <SendMessage key={data.length} content={field} />]);
+    if (field.length > 0) {
+      setData([...data, <SendMessage key={data.length} content={field} />]);
+    }
 
-    if (phoneVerify(phoneOk) && !statusPhone) {
+    if (phoneVerify(formatedPhone)) {
       setPhone(field);
       setStatusPhone(true);
-    } else if (phone.length > 0) {
-      setMessage(field);
-    } else {
-      setStatusPhone(data.length);
+    } else if (statusPhone && !statusMessage) {
+      const value = field.length > 1
+        ? field
+        : "";
+
+      setMessage(value);
+      setStatusMessage(true);
+    } else if (statusMessage) {
+      setStatusType(true);
     }
 
     document.querySelector(".input-msg").value = "";
@@ -32,9 +45,31 @@ function WhatsappMessage() {
 
   useEffect(() => {
     setData([
-      ...data, <ReceivedMessage key={phoneOk} content={phoneOk} status={phoneVerify(phoneOk)} />]);
-    console.log(phone, message);
+      ...data,
+      <ReceivedMessage
+        key={data.length}
+        content={formatedPhone}
+        status={phoneVerify(formatedPhone)}
+      />]);
   }, [statusPhone]);
+
+  useEffect(() => {
+    if (statusMessage) {
+      setData([...data, <TypeWhatsappLink key={data.length} type={type} setType={setType} />]);
+    }
+  }, [statusMessage]);
+
+  useEffect(() => {
+    setField("");
+    const content = document.querySelector(".conversation-container");
+    content.scrollTop = content.scrollHeight;
+  }, [data]);
+
+  useEffect(() => {
+    if (statusType) {
+      setData([...data, <GeneratedLink key={data.length} request={{ whatsapp, message, type }} />]);
+    }
+  }, [statusType]);
 
   return (
     <div className="chat">
@@ -58,7 +93,7 @@ function WhatsappMessage() {
             <i className="zmdi zmdi-attachment-alt">{}</i>
           </div>
           <div className="actions">
-            <i className="zmdi zmdi-phone">{}</i>
+            <i className="zmdi zmdi-whatsapp">{}</i>
           </div>
         </div>
         <div className="conversation">
@@ -112,7 +147,7 @@ function WhatsappMessage() {
               data-cy="field"
               placeholder="Type a message"
               autoComplete="off"
-              onChange={({ target: { value } }) => setFiled(value)}
+              onChange={({ target: { value } }) => setField(value)}
             />
             <div className="photo">
               <i className="zmdi zmdi-camera">{}</i>
