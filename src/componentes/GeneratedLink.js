@@ -28,7 +28,11 @@ function GeneratedLink({ request }) {
         <p>{ statusCopy && "Copiado com sucesso!"}</p>
       </div>
     )
-    : [];
+    : (
+      <div className="message received">
+        <p>Gerando link, aguarde...</p>
+      </div>
+    );
 }
 
 GeneratedLink.propTypes = {
