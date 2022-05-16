@@ -277,16 +277,12 @@
 
 @media (max-width: 768px) {
   .chat {
-    height: 1400px;
-    width: 500px;
-  }
-
-  .chat .title {
-    font-size: 3em;
+    max-height: 300px;
+    width: 450px;
   }
 
   .bar .name {
-    font-size: 26px;
+    font-size: 22px;
   }
 
   .bar .name .status {
@@ -298,22 +294,23 @@
   }
 
   .message.received {
+    font-size: 24px;
     line-height: 28px;
   }
 
   .message.send {
+    font-size: 24px;
     line-height: 28px;
   }
 }
 
 @media (max-width: 425px) {
   .chat {
-    height: 600px;
-    width: 250px;
+    width: 350px;
   }
 
-  .chat .title {
-    font-size: 1.5em;
+  .chat h2 {
+    font-size: 24px;
   }
 
   .bar .name {
@@ -326,6 +323,57 @@
 
   .message {
     font-size: 12px;
+  }
+
+  .message.received {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .message.send {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .conversation-compose .input-msg {
+    font-size: 11px;
+  }
+
+  .conversation-compose .send .circle {
+    height: 38px;
+    width: 38px;
+  }
+}
+
+@media (max-width: 320px) {
+  .chat {
+    width: 250px;
+  }
+
+  .chat h2 {
+    font-size: 18px;
+  }
+
+  .bar .name {
+    font-size: 18px;
+  }
+
+  .bar .name .status {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 12px;
+  }
+
+  .message.received {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .message.send {
+    font-size: 14px;
+    line-height: 18px;
   }
 
   .conversation-compose .input-msg {
