@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { phoneVerify } from "../utils/functions";
+import { getImages, phoneVerify } from "../utils/functions";
 
 import ReceivedMessage from "./ReceivedMessage";
 import SendMessage from "./SendMessage";
@@ -21,7 +21,7 @@ function WhatsappMessage() {
 
   const formatedPhone = field.replace(/^(\d\d)(\d{5})(\d{4})/, "($1) $2-$3");
 
-  function handleClick() {
+  function handleClickOrKeypress() {
     if (field.length > 0) {
       setData([...data, <SendMessage key={data.length} content={field} />]);
     }
@@ -55,14 +55,16 @@ function WhatsappMessage() {
 
   useEffect(() => {
     if (statusMessage) {
-      setData([...data, <TypeWhatsappLink key={data.length} type={type} setType={setType} />]);
+      setData([...data, <TypeWhatsappLink key={data.length} setType={setType} />]);
     }
   }, [statusMessage]);
 
   useEffect(() => {
     setField("");
-    const content = document.querySelector(".conversation-container");
-    content.scrollTop = content.scrollHeight;
+    window.setInterval(() => {
+      const container = document.querySelector("conversation-container");
+      container.scrollTop = container.scrollHeight;
+    });
   }, [data]);
 
   useEffect(() => {
@@ -73,14 +75,14 @@ function WhatsappMessage() {
 
   return (
     <div className="chat">
-      <h2 className="title" data-cy="title">WhatsApp Link Generate</h2>
+      <h2>Gerador de link whatsapp.</h2>
       <div className="chat-container">
         <div className="bar">
           <div className="back">
             <i className="zmdi zmdi-arrow-left">{}</i>
           </div>
           <div className="avatar">
-            <img src="" alt="TakeBlip" />
+            <img src={getImages().icon} alt="TakeBlip" />
           </div>
           <div className="name">
             <span>TakeBlip</span>
@@ -98,7 +100,7 @@ function WhatsappMessage() {
         </div>
         <div className="conversation">
           <div className="conversation-container">
-            <div className="message sent">
+            <div className="message send">
               Olá, como posso criar um link whatsapp?
               <span className="metadata">
                 <span className="tick">
@@ -119,7 +121,7 @@ function WhatsappMessage() {
               </span>
             </div>
             <div className="message received">
-              Olá, tudo bem? É muito fácil. Digite seu número whatsapp com DDD.
+              Olá, tudo bem? É muito fácil. Digite seu número whatsapp com DDD. Ex: 11987654321
             </div>
             {data.map((render) => render)}
           </div>
@@ -145,21 +147,20 @@ function WhatsappMessage() {
               className="input-msg"
               name="input"
               data-cy="field"
-              placeholder="Type a message"
+              placeholder="Digite a mensagem"
               autoComplete="off"
               onChange={({ target: { value } }) => setField(value)}
             />
             <div className="photo">
               <i className="zmdi zmdi-camera">{}</i>
             </div>
-            <button type="button" className="send" data-cy="send" onClick={handleClick}>
+            <button type="button" className="send" data-cy="send" onClick={handleClickOrKeypress}>
               <div className="circle">
                 <i className="zmdi zmdi-mail-send">{}</i>
               </div>
             </button>
           </form>
         </div>
-        <button type="button" data-cy="copy">Copiar Link</button>
       </div>
     </div>
   );

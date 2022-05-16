@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function SendMessage({ content }) {
   return (
-    <div className="message sent">
+    <div className="message send">
       {`${content}`}
       <span className="metadata">
         <span className="tick">
