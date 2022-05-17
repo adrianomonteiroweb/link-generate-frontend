@@ -10,9 +10,17 @@ Como rodar a aplicação:
 
 Online em [http://localhost:3000](http://localhost:3000)
 
+```bash
+  npm start
+```
+
 ### `npm run cypress-open`
 
 Abrirá o ambiente de tests do cypress.
+
+```bash
+  npm run cypress-open
+```
 
 ### Tecnologias
 
